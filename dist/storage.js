@@ -23,7 +23,7 @@ export function ensureStorage() {
         fs.mkdirSync(d, { recursive: true });
     }
     if (!fs.existsSync(p.config)) {
-        fs.writeFileSync(p.config, JSON.stringify({ sprayMaxDepth: 2, briefingTtlMs: 3600000, briefingMaxPerHour: 20, briefingMaxSkills: 5, briefingMaxSummaryChars: 4000, runTimeoutMs: 30000, runMaxOutputBytes: 65536 }, null, 2));
+        fs.writeFileSync(p.config, JSON.stringify({ sprayMaxDepth: 2, briefingTtlMs: 3600000, briefingMaxPerHour: 20, briefingMaxSkills: 5, briefingMaxSummaryChars: 4000, runTimeoutMs: 30000, runMaxOutputBytes: 65536, chainMaxDepth: 3, mcpServers: {} }, null, 2));
     }
     if (!fs.existsSync(p.stats)) {
         fs.writeFileSync(p.stats, JSON.stringify({ skills: {}, sprays: 0, briefingsCreated: 0 }, null, 2));

@@ -2,7 +2,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { createApp } from './app.js';
-import { approveSkillCli, rollbackSkillCli } from './cli.js';
+import { approveSkillCli, rollbackSkillCli, runSkillCli } from './cli.js';
 import { registerTools } from './tools.js';
 import { purgeExpired } from './briefing.js';
 const argv = process.argv.slice(2);
@@ -11,6 +11,9 @@ if (argv[0] === 'approve') {
 }
 else if (argv[0] === 'rollback') {
     rollbackSkillCli(argv[1], argv[2]).then((r) => { console.log(r); process.exit(0); });
+}
+else if (argv[0] === 'run-skill') {
+    runSkillCli(argv[1], argv[2]).then((r) => { console.log(r); process.exit(0); });
 }
 else if (argv[0] === 'purge') {
     const { purgeExpired } = await import('./briefing.js');

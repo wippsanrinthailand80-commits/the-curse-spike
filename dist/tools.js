@@ -52,7 +52,7 @@ export function registerTools(server, app) {
         },
     }, async ({ query, briefing_id }) => {
         const { allowed } = scopeFilter(app, briefing_id);
-        let skills = app.registry.search(query || '');
+        let skills = await app.registry.searchAsync(query || '');
         if (allowed)
             skills = skills.filter(s => allowed.has(s.name));
         // active only already in search; but ensure
@@ -382,7 +382,7 @@ export function registerTools(server, app) {
         }
         else {
             // auto-select top-N active
-            const candidates = app.registry.search(task).filter(s => s.status === 'active');
+            const candidates = (await app.registry.searchAsync(task)).filter(s => s.status === 'active');
             granted = candidates.slice(0, ms).map(s => s.name);
         }
         // dedupe

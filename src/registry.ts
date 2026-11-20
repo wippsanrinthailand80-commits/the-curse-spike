@@ -4,10 +4,12 @@ import chokidar from 'chokidar';
 import { Skill, SkillStats, StatsFile } from './types.js';
 import { paths, readJson, writeJson, bundledSkillsDir } from './storage.js';
 import { loadSkillFromDir } from './skillparse.js';
+import { SearchProvider, KeywordSearchProvider } from './search.js';
 
 export class Registry {
   skills = new Map<string, Skill>();
   stats: StatsFile = { skills: {}, sprays: 0, briefingsCreated: 0 };
+  searchProvider: SearchProvider = new KeywordSearchProvider();
   private watcher?: any;
 
   loadAll(): void {
@@ -64,6 +66,12 @@ export class Registry {
   // ranking interface for semantic plug-in later
   rank(query: string, limit?: number): Skill[] {
     return this.search(query).slice(0, limit);
+  }
+
+  async searchAsync(query: string): Promise<Skill[]> {
+    const active = [...this.skills.values()].filter(s => s.status === 'active');
+    const ranked = await this.searchProvider.rank(query || '', active, this.stats.skills || {});
+    return ranked;
   }
 
   recordRun(name: string, success: boolean): void {
