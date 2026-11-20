@@ -25,7 +25,7 @@ npx -y the-curse-spike
 
 Or from GitHub:
 ```bash
-npx github:USERNAME/the-curse-spike
+npx github:wippsanrinthailand80-commits/the-curse-spike
 ```
 
 Or:
