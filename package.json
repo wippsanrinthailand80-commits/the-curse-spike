@@ -1,0 +1,31 @@
+{
+  "name": "the-curse-spike",
+  "version": "0.1.0",
+  "description": "Local MCP skill hub: progressive disclosure, safe agent-authored skills, scoped briefings (Spray).",
+  "type": "module",
+  "bin": {
+    "the-curse-spike": "dist/index.js",
+    "curse-spike": "dist/index.js"
+  },
+  "files": ["dist", "skills-bundled", "install.sh", "README.md"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "chokidar": "^4.0.0",
+    "js-yaml": "^4.1.0",
+    "tsx": "^4.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}
